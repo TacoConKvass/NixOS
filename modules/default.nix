@@ -1,0 +1,7 @@
+{ ... }:
+{
+        imports = [
+                ./nixvim
+                ./localisation
+        ];
+}

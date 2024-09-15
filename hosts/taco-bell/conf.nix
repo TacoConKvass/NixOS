@@ -1,12 +1,11 @@
 { ... }:
 {
 	imports = [
-			../../hardware-configuration.nix
-			../../users
-      ../../modules/stylix
-      ../../modules/nixvim
-      ../../modules/localisation
- ];
+		../../hardware-configuration.nix
+		../../users
+    ../../modules
+		../../modules/localisation
+	];
 
 	# Bootloader.
 	boot.loader.grub.enable = true;
@@ -45,6 +44,10 @@
 	programs = {
 		firefox.enable = true;
 	};
+
+  modules = {
+        nixvim.enable = true;
+  };
 
 	# Allow unfree packages
 	nixpkgs.config.allowUnfree = true;

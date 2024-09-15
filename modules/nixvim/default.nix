@@ -1,34 +1,40 @@
-{ ... }:
+{ lib, config, ... }: 
 {
 
-  programs.nixvim = {
-    enable = true;
-    defaultEditor = true;
+	options = {
+		modules.nixvim.enable = lib.mkEnableOption "Enables Nix driven Neovim configuration";
+	};
 
-    opts = {
-      number = true;
-      relativenumbers = true;
-      
-      expandtab = true;
-      shiftwidth = 2;
-      tabstop = 2;
-    };
+	config = lib.mkIf config.modules.nixvim.enable {
+		programs.nixvim = {
+			enable = true;
+			defaultEditor = true;
 
-    colorschemes.cattpuccin = {
-      enable = true;
-      setting.transparent_backgrounds = true;
-    };
+			opts = {
+				number = true;
+				relativenumber = true;
 
-    plugins = {
-      telescope.enable = true;
-      treesitter.enable = true;
-      lsp = {
-        enable = true;
-        servers = {
-          nixd.enable = true;
+				expandtab = true;
+				shiftwidth = 2;
+				tabstop = 2;
+			};
+
+			colorschemes.catppuccin = {
+				enable = true;
+				settings.transparent_backgrounds = true;
+			};
+
+			plugins = {
+				telescope.enable = true;
+				treesitter.enable = true;
+	
+				lsp = {
+					enable = true;
+					servers = {
+					nixd.enable = true;
+				};
+			};
+	        };
         };
-      };
-    };
-  };
-
+};
 }
