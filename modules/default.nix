@@ -1,7 +1,7 @@
 { ... }:
 {
-        imports = [
-                ./nixvim
-                ./localisation
-        ];
+  imports = [
+    ./nixvim
+    ./localisation
+  ];
 }

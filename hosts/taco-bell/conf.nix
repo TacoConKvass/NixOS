@@ -46,7 +46,7 @@
 	};
 
   modules = {
-        nixvim.enable = true;
+    nixvim.enable = true;
   };
 
 	# Allow unfree packages
