@@ -4,7 +4,7 @@
 		modules.internalisation.enable = lib.mkEnableOption "Enable internalisation configuration";
 	};
 
-	cofig = lib.mkIf config.modules.internalisation.enable {
+	config = lib.mkIf config.modules.internalisation.enable {
 		# Time zone 
 		time.timeZone = "Europe/Warsaw";
 
