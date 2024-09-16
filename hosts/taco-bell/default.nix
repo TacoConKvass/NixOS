@@ -4,7 +4,6 @@
 		../../hardware-configuration.nix
 		../../users
     ../../modules
-		../../modules/localisation
 	];
 
 	# Bootloader.
@@ -47,7 +46,8 @@
 
   modules = {
     nixvim.enable = true;
-  };
+    internalisation.enable = true;
+ };
 
 	# Allow unfree packages
 	nixpkgs.config.allowUnfree = true;

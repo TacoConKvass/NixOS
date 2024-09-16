@@ -11,8 +11,8 @@
 		nixosConfigurations.taco-bell = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
-				./hosts/taco-bell/conf.nix
-                                inputs.nixvim.nixosModules.nixvim
+				./hosts/taco-bell
+        inputs.nixvim.nixosModules.nixvim
 			];
 		};
 	};
