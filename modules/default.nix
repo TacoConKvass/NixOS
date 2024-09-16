@@ -2,6 +2,6 @@
 {
   imports = [
     ./nixvim
-    ./localisation
+    ./internationalisation
   ];
 }
