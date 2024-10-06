@@ -22,9 +22,9 @@
 				./hosts/wsl
 				inputs.nixvim.nixosModules.nixvim
 				inputs.nixos-wsl.nixosModules.default {
-	  				system.stateVersion = "24.05";
+	  			system.stateVersion = "24.05";
 					wsl.enable = true;
-	    			}
+	    	}
 			];
 		};
 	};
