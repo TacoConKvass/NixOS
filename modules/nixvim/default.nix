@@ -18,17 +18,27 @@
 
 			colorschemes.catppuccin = {
 				enable = true;
-				settings.transparent_background = true;
+				settings = {
+					transparent_background = true;
+					color_overrides.latte = {
+						lineNr = "#ffffff";
+						lineNrAbove = "#ffffff";
+						lineNrBelow = "#ffffff";
+						comment = "ffffff";
+					};
+				};
 			};
 
 			plugins = {
 				telescope.enable = true;
 				treesitter.enable = true;
-
+	
+				
 				lsp = {
 				 	enable = true;
 				 	servers = {
 						nixd.enable = true;
+						csharp-ls.enable = true;	
 					};
 				};
 			};
