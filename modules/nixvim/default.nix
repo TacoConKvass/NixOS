@@ -37,7 +37,12 @@
 			'';
 
 			plugins = {
-				telescope.enable = true;
+				telescope = {
+					enable = true;
+					keymaps = {
+						"<leader>f" = "find_files";
+					};
+				};
 				treesitter.enable = true;
 	
 				
