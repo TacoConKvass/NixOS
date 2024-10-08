@@ -1,6 +1,11 @@
 { lib, config, ... } : {
 	options = {
 		modules.nixvim.enable = lib.mkEnableOption "Enables Nix driven Neovim configuration";
+
+		modules.nixvim.theme = lib.mkOption {
+			type = lib.types.enum ["gruvbox" "carbonfox" "duskfox"];
+			default = "carbonfox";
+		};
 	};
 
 	config = lib.mkIf config.modules.nixvim.enable {
@@ -16,18 +21,20 @@
 				tabstop = 2;
 			};
 
-			colorschemes.catppuccin = {
+			# Gruvbox
+			colorschemes.gruvbox.enable = lib.mkIf (config.modules.nixvim.theme == "gruvbox") true;
+
+			# Nightfox
+			colorschemes.nightfox = lib.mkIf (config.modules.nixvim.theme == "carbonfox" || config.modules.nixvim.theme == "duskfox") {
 				enable = true;
-				settings = {
-					transparent_background = true;
-					color_overrides.latte = {
-						lineNr = "#ffffff";
-						lineNrAbove = "#ffffff";
-						lineNrBelow = "#ffffff";
-						comment = "ffffff";
-					};
-				};
+				flavor = config.modules.nixvim.theme;
 			};
+			
+			extraConfigLuaPost = ''
+				vim.api.nvim_set_hl(0, 'LineNr', { fg='#F0F0F0', bold=true })
+				vim.api.nvim_set_hl(0, 'Comment', { fg='#C0C0C0', bold=true })
+				vim.api.nvim_set_hl(0, "Normal", { guibg=NONE, ctermbg=NONE })
+			'';
 
 			plugins = {
 				telescope.enable = true;

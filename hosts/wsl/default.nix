@@ -10,7 +10,10 @@
 	};
 
 	modules = {
-		nixvim.enable = true;
+		nixvim = {
+			enable = true;
+			theme = "duskfox";
+		};
 		internalisation.enable = true;
 	};
 
