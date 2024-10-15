@@ -51,7 +51,8 @@
 				 	servers = {
 						nixd.enable = true;
 						csharp-ls.enable = true;	
-					};
+						zls.enable = true;
+				};
 				};
 			};
 		};
