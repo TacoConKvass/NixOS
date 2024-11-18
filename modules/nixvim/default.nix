@@ -32,7 +32,7 @@
 			
 			extraConfigLuaPost = ''
 				vim.api.nvim_set_hl(0, 'LineNr', { fg='#F0F0F0', bold=true })
-				vim.api.nvim_set_hl(0, 'Comment', { fg='#C0C0C0', bold=true })
+				vim.api.nvim_set_hl(0, 'Comment', { fg='#CCA000', bold=true })
 				vim.api.nvim_set_hl(0, "Normal", { guibg=NONE, ctermbg=NONE })
 			'';
 
@@ -44,15 +44,27 @@
 					};
 				};
 				treesitter.enable = true;
-	
-				
+				cmp = {
+					enable = true;
+					autoEnableSources = true;
+  				settings.sources = [
+    				{ name = "nvim_lsp"; }
+    				{ name = "path"; }
+    				{ name = "buffer"; }
+  				];
+					settings.mapping = {
+					  #	"<>" = "cmp.mapping.complete()";
+						"<Tab>" = "cmp.mapping.confirm({ select = true })";
+						"<S-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+					};
+				};
 				lsp = {
 				 	enable = true;
 				 	servers = {
 						nixd.enable = true;
 						csharp-ls.enable = true;	
 						zls.enable = true;
-				};
+				  };
 				};
 			};
 		};
