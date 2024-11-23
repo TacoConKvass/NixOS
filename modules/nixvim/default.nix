@@ -14,7 +14,7 @@
 			defaultEditor = true;
 
 			opts = {
-			 	number = true;
+				number = true;
 				relativenumber = true;
 
 				shiftwidth = 2;
@@ -44,28 +44,38 @@
 					};
 				};
 				treesitter.enable = true;
-				cmp = {
-					enable = true;
-					autoEnableSources = true;
-  				settings.sources = [
-    				{ name = "nvim_lsp"; }
-    				{ name = "path"; }
-    				{ name = "buffer"; }
-  				];
-					settings.mapping = {
-					  #	"<>" = "cmp.mapping.complete()";
-						"<Tab>" = "cmp.mapping.confirm({ select = true })";
-						"<S-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-					};
-				};
+
 				lsp = {
-				 	enable = true;
-				 	servers = {
+					enable = true;
+					servers = {
 						nixd.enable = true;
 						csharp-ls.enable = true;	
 						zls.enable = true;
-				  };
+					};
 				};
+
+				cmp = {
+					enable = true;
+					autoEnableSources = true;
+					
+					settings.sources = [
+						{ name = "nvim_lsp"; }
+						{ name = "path"; }
+						{ name = "buffer"; }
+					];
+					
+					settings.mapping = {
+						"<Tab>" = "cmp.mapping.confirm({ select = true })";
+						"<S-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+					};
+
+					settings.snippet.expand = ''
+						function(args)
+							require('snippy').expand_snippet(args.body)
+						end
+					'';
+				};
+				cmp-snippy.enable = true;
 			};
 		};
 	};
