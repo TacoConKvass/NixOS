@@ -1,8 +1,5 @@
-{ ... }:
-{
-	imports = [
-		./nixvim
-		./internationalisation
-		./desktop
-	];
+{ config, pkgs, ... } : { 
+    imports = [
+        ./dev
+    ];
 }

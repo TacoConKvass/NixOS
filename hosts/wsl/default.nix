@@ -1,42 +1,15 @@
-{ ... }:
-{
-	imports = [
-		../../users
-		../../modules
-	];
+{ pkgs, ... } : {
+    imports = [ ./../../modules ];
 
-	programs = {
-		firefox.enable = true;
-	};
+    modules = {
+        dev.zig = true;
+        dev.rust = true;
+        dev.neovim = true;
+    };
 
-	modules = {
-		nixvim = {
-			enable = true;
-			theme = "duskfox";
-		};
-		internalisation.enable = true;
-	};
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
-	# Enable networking
-	networking.hostName = "taco-wsl";
-	networking.networkmanager.enable = true;
+    system.stateVersion = "24.11";
 
-	# Enable sound with pipewire.
-	hardware.pulseaudio.enable = false;
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-	};
-
-	# Enable flakes
-	nix.settings.experimental-features = ["nix-command" "flakes"];
-
-	# Allow unfree packages
-	nixpkgs.config.allowUnfree = true;
-	
-	# NixOS version
-	system.stateVersion = "24.05";
+    system.build.apply = "echo Hi!";
 }
