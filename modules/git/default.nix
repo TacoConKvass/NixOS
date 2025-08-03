@@ -22,6 +22,7 @@ in {
             enable = true;
             config = {
                 credential.helper = "${pkgs.${gcm}}/bin/${gcm}";
+                credential.credentialStore = "gpg";
                 user.name = cfg.username;
                 user.email = cfg.email;
             };

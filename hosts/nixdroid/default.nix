@@ -16,6 +16,12 @@
                 home = config.user.home;
             };
         };
+        
+        git = {
+            enable = true;
+            username = "TacoConKvass";
+            email = "e_frun@o2.pl";
+        };
     };
     
     system.stateVersion = "24.05";
