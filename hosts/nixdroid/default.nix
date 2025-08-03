@@ -6,7 +6,7 @@
         dev.rust = true;
 
         neovim = {
-            enable = true;
+            enable = false;
             config = {
                 pull = true;
                 repository = {
@@ -24,8 +24,10 @@
         };
     };
     
+    system.packages = [ pkgs.neovim ];
+
     system.stateVersion = "24.05";
-    
+
     environment.etcBackupExtension = ".bak";
     
     nix.extraOptions = ''

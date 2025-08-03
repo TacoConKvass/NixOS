@@ -29,8 +29,8 @@ in {
         };
     };
 
-    config = {
-        environment.${pkgsAttr} = lib.mkIf cfg.enable ([ pkgs.neovim ]
+    config = lib.mkIf cfg.enable {
+        environment.${pkgsAttr} = ([ pkgs.neovim ]
             ++ lib.optionals cfg.config.pull [ pkgs.git ]
             ++ cfg.additionalPackages
         );
