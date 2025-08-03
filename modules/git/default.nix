@@ -22,7 +22,9 @@ in {
             enable = true;
             config = {
                 credential.helper = "${pkgs.${gcm}}/bin/${gcm}";
-                credential.credentialStore = "plaintext";
+                # Unsafe, but should work everywhere.
+                # TODO: Change as soon as possible
+                credential.credentialStore = "plaintext"; 
                 user.name = cfg.username;
                 user.email = cfg.email;
             };
