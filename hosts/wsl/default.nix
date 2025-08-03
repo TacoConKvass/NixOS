@@ -16,6 +16,12 @@
                 home = config.users.users.nixos.home;
             };
         };
+
+        git = {
+            enable = true;
+            username = "TacoConKvass";
+            email = "e_frun@o2.pl";
+        };
     };
 
     nix.settings.experimental-features = ["nix-command" "flakes"];

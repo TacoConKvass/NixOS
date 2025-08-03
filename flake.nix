@@ -23,6 +23,7 @@
             pkgs = import inputs.pkgs-25-05 { system = arm; };
             modules = [
                 ./hosts/nixdroid
+                inputs.pkgs-25-05.nixos.modules
             ];
         };
 

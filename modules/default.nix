@@ -2,5 +2,6 @@
     imports = [
         ./dev
         ./neovim
+        ./git
     ];
 }
