@@ -30,7 +30,6 @@
             system = x86;
             modules = [
                 ./hosts/wsl
-                ./shared.nix
                 inputs.wsl.nixosModules.default {
                     system.stateVersion = "24.11";
                     wsl.enable = true;
