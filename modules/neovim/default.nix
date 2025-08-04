@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }: let
     cfg = config.modules.neovim;
     repo = cfg.config.repository;
-    pkgsAttr = if (builtins.hasAttr "packages" config.environment) then "packages" else "systemPackages";
+    isAndroid = builtins.pathExists /storage/emulated;
+    at = index: list: builtins.elemAt list index;
+    pkgsAttr = if (isAndroid) then "packages" else "systemPackages";
+    scriptAttr = lib.splitString "." (if (isAndroid) then "build.activationAfter" else "system.activationScripts");
 in {
     options.modules.neovim = {
         enable = lib.mkEnableOption "Ensures Neovim is installed";
@@ -21,6 +24,16 @@ in {
                 type = lib.types.path;
                 description = "Home path";
             };
+            gitPackage = lib.mkOption {
+                type = lib.types.package;
+                default = pkgs.git;
+                description = "Neovim package";
+            };
+        };
+        package = lib.mkOption {
+            type = lib.types.package;
+            default = pkgs.neovim;
+            description = "Neovim package";
         };
         additionalPackages = lib.mkOption {
             type = lib.types.listOf lib.types.package;
@@ -30,18 +43,18 @@ in {
     };
 
     config = lib.mkIf cfg.enable {
-        environment.${pkgsAttr} = ([ pkgs.neovim ]
-            ++ lib.optionals cfg.config.pull [ pkgs.git ]
+        environment.${pkgsAttr} = ([ cfg.package ]
+            ++ lib.optionals cfg.config.pull [ cfg.config.gitPackage ]
             ++ cfg.additionalPackages
         );
 
-        system.activationScripts = {
-            neovimSetup.text = if (cfg.config.pull) then ''
-                if [ ! -d ${cfg.config.home}/.config/nvim ]; then
-                    echo "Pulling Neovim config..." 
-                    ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${cfg.config.home}/.config/nvim
-                fi
-            '' else "";
-        };
+        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = ((lib.mkIf cfg.config.pull) ''
+            if [ ! -d ${cfg.config.home}/.config/nvim ]; then
+               echo "Pulling Neovim config..."
+               ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${cfg.config.home}/.config/nvim
+            else
+                echo "Neovim config found..."
+            fi
+        '');
     };
 }
