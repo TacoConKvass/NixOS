@@ -56,7 +56,7 @@ in {
         );
 
         ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = ((lib.mkIf cfg.config.enable) ''
-            if [ ! -d ${cfg.config.home}/gitconfig ]; then
+            if [ ! -d ${cfg.config.home}/.gitconfig ]; then
                 echo "Creating Git config in ${cfg.config.home}..."
                 echo '
             [user]
@@ -66,7 +66,7 @@ in {
                 helper = ${"${pkgs.${gcm}}/bin/${gcm}"}
                 credentialStore = "${cfg.config.gcm.storeType}"
                 cacheOptions = "${cfg.config.gcm.cacheOptions}"
-            ' > ${cfg.config.home}/gitconfig
+            ' > ${cfg.config.home}/.gitconfig
             else
                 echo "Git config found..."
             fi
