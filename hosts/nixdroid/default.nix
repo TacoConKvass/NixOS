@@ -17,6 +17,7 @@ in {
                 };
                 home = homeDir;
             };
+            additionalPackages = [ pkgs.ripgrep ];
         };
 
         git = {
@@ -34,8 +35,6 @@ in {
         };
     };
     
-    system.packages = [ pkgs.neovim ];
-
     system.stateVersion = "24.05";
 
     environment.etcBackupExtension = ".bak";
