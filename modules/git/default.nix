@@ -55,7 +55,7 @@ in {
             ))
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = ((lib.mkIf cfg.config.enable) ''
+        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = (if (!cfg.config.enable) then "" else ''
             if [ ! -d ${cfg.config.home}/.gitconfig ]; then
                 echo "Creating Git config in ${cfg.config.home}..."
                 echo '

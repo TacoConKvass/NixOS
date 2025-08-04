@@ -48,7 +48,7 @@ in {
             ++ cfg.additionalPackages
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = ((lib.mkIf cfg.config.pull) ''
+        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = (if (!cfg.config.pull) then "" else ''
             if [ ! -d ${cfg.config.home}/.config/nvim ]; then
                echo "Pulling Neovim config..."
                ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${cfg.config.home}/.config/nvim
