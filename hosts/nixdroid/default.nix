@@ -26,10 +26,6 @@ in {
                 enable = true;
                 username = "TacoConKvass";
                 email = "e_frun@o2.pl";
-                gcm = {
-                    enable = true;
-                    storeType = "gpg";
-                };
                 home = homeDir;
             };
         };
