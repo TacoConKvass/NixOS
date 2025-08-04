@@ -1,4 +1,6 @@
-{ config, pkgs, ... } : {
+{ config, pkgs, ... } : let
+    homeDir = config.user.home;
+in {
     imports = [ ./../../modules ];
 
     modules = {
@@ -6,21 +8,29 @@
         dev.rust = true;
 
         neovim = {
-            enable = false;
+            enable = true;
             config = {
                 pull = true;
                 repository = {
                     url = "https://github.com/TacoConKvass/nvim";
                     branch = "lazy";
                 };
-                home = config.user.home;
+                home = homeDir;
             };
         };
-        
+
         git = {
             enable = true;
-            username = "TacoConKvass";
-            email = "e_frun@o2.pl";
+            config = {
+                enable = true;
+                username = "TacoConKvass";
+                email = "e_frun@o2.pl";
+                gcm = {
+                    enable = true;
+                    storeType = "gpg";
+                };
+                home = homeDir;
+            };
         };
     };
     

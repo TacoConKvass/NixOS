@@ -1,4 +1,6 @@
-{ config, ... } : {
+{ config, ... } : let
+    homeDir = config.users.users.nixos.home;
+in {
     imports = [ ./../../modules ];
 
     modules = {
@@ -13,17 +15,21 @@
                     url = "https://github.com/TacoConKvass/nvim";
                     branch = "lazy";
                 };
-                home = config.users.users.nixos.home;
+                home = homeDir;
             };
         };
 
         git = {
             enable = true;
-            username = "TacoConKvass";
-            email = "e_frun@o2.pl";
-            gcm = {
+            config = {
                 enable = true;
-                store = "gpg";
+                username = "TacoConKvass";
+                email = "e_frun@o2.pl";
+                gcm = {
+                    enable = true;
+                    storeType = "gpg";
+                };
+                home = homeDir;
             };
         };
     };
