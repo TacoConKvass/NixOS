@@ -61,11 +61,13 @@ in {
                 echo '
             [user]
                 name = "${cfg.config.username}"
-                email = "${cfg.config.email}"
+                email = "${cfg.config.email}"'' +
+            (if (!cfg.config.gcm.enable) then "" else ''
             [credential]
                 helper = ${"${pkgs.${gcm}}/bin/${gcm}"}
                 credentialStore = "${cfg.config.gcm.storeType}"
                 cacheOptions = "${cfg.config.gcm.cacheOptions}"
+            '') + ''
             ' > ${cfg.config.home}/.gitconfig
             else
                 echo "Git config found..."
