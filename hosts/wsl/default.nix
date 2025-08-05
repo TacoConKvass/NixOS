@@ -1,5 +1,5 @@
 { config, ... } : let
-    homeDir = config.users.users.nixos.home;
+    user = config.users.users.nixos;
 in {
     imports = [ ./../../modules ];
 
@@ -16,7 +16,7 @@ in {
                     url = "https://github.com/TacoConKvass/nvim";
                     branch = "lazy";
                 };
-                home = homeDir;
+                user = user;
             };
         };
 
@@ -30,7 +30,7 @@ in {
                     enable = true;
                     storeType = "gpg";
                 };
-                home = homeDir;
+                user = user;
             };
         };
     };

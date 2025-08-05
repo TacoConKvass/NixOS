@@ -36,9 +36,9 @@ in {
                     description = ''Credentials cache options. Only take effect if gcm.storeType is set to "cache"'';
                 };
             };
-            home = lib.mkOption {
-                type = lib.types.path;
-                description = "Home path to put .gitconfig into";
+            user = lib.mkOption {
+                type = lib.types.attrs;
+                description = "User to whom the generated .gitconfig will belong";
             };
         };
         package = lib.mkOption {
@@ -55,20 +55,26 @@ in {
             ))
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = (if (!cfg.config.enable) then "" else ''
-            if [ ! -d ${cfg.config.home}/.gitconfig ]; then
-                echo "Creating Git config in ${cfg.config.home}..."
+        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = (if (!cfg.config.enable) then "" else
+            let
+                gitconfig = "${cfg.config.user.home}/.gitconfig";
+                name = if (isAndroid) then "userName" else "name";
+            in ''
+            if [ ! -f ${gitconfig} ]; then
+                echo "Creating Git config in ${cfg.config.user.home}..."
                 echo '
             [user]
                 name = "${cfg.config.username}"
-                email = "${cfg.config.email}"'' +
+                email = "${cfg.config.email}"
+            '' +
             (if (!cfg.config.gcm.enable) then "" else ''
             [credential]
                 helper = ${"${pkgs.${gcm}}/bin/${gcm}"}
                 credentialStore = "${cfg.config.gcm.storeType}"
                 cacheOptions = "${cfg.config.gcm.cacheOptions}"
             '') + ''
-            ' > ${cfg.config.home}/.gitconfig
+            ' > ${gitconfig}
+                chown ${cfg.config.user.${name}}:users ${gitconfig}
             else
                 echo "Git config found..."
             fi

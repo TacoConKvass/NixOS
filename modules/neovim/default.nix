@@ -20,9 +20,9 @@ in {
                     description = "Branch to pull";
                 };
             };
-            home = lib.mkOption {
-                type = lib.types.path;
-                description = "Home path";
+            user = lib.mkOption {
+                type = lib.types.attrs;
+                description = "User to whom the generated config will belong";
             };
             gitPackage = lib.mkOption {
                 type = lib.types.package;
@@ -48,10 +48,15 @@ in {
             ++ cfg.additionalPackages
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = (if (!cfg.config.pull) then "" else ''
-            if [ ! -d ${cfg.config.home}/.config/nvim ]; then
+        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = (if (!cfg.config.pull) then "" else
+        let
+            configDir = "${cfg.config.user.home}/.config/nvim";
+            name = if (isAndroid) then "userName" else "name";
+        in ''
+            if [ ! -d ${configDir} ]; then
                echo "Pulling Neovim config..."
-               ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${cfg.config.home}/.config/nvim
+               ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${configDir}
+               chown ${cfg.config.user.${name}}:users ${configDir}
             else
                 echo "Neovim config found..."
             fi
