@@ -6,6 +6,7 @@ in {
     modules = {
         dev.zig = true;
         dev.rust = true;
+        dev.cSharp = true;
 
         neovim = {
             enable = true;
