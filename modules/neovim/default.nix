@@ -43,7 +43,7 @@ in {
     };
 
     config = lib.mkIf cfg.enable {
-        environment.${pkgsAttr} = ([ cfg.package ]
+        environment.${pkgsAttr} = ([ cfg.package pkgs.lua-language-server pkgs.nil ]
             ++ lib.optionals cfg.config.pull [ cfg.config.gitPackage ]
             ++ cfg.additionalPackages
         );
