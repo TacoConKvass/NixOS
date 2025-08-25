@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... } : let 
     cfg = config.modules.dev;
+    dotnetPkgs = pkgs.dotnetCorePackages;
     pkgsAttr = if (builtins.hasAttr "packages" config.environment) then "packages" else "systemPackages";
 in {
     options.modules.dev = {
@@ -12,12 +13,18 @@ in {
         environment.${pkgsAttr} = ([]
             ++ (lib.optionals cfg.zig [ pkgs.zig ])
             ++ (lib.optionals cfg.rust [ pkgs.cargo pkgs.rustc pkgs.gcc ])
-            ++ (lib.optionals cfg.cSharp [ pkgs.dotnetCorePackages.dotnet_8.sdk ])
+            ++ (lib.optionals cfg.cSharp [(
+                dotnetPkgs.combinePackages [
+                    dotnetPkgs.dotnet_8.sdk
+                    dotnetPkgs.dotnet_9.sdk
+                    pkgs.dotnetPackages.Nuget
+                ]
+            )])
         );
 
         modules.neovim.additionalPackages = []
             ++ (lib.optionals cfg.zig [ pkgs.zls ])
             ++ (lib.optionals cfg.rust [ pkgs.rust-analyzer ])
-            ++ (lib.optionals cfg.cSharp [ pkgs.roslyn-ls ]);
+            ++ (lib.optionals cfg.cSharp [ pkgs.omnisharp-roslyn ]);
     };
 }
