@@ -3,5 +3,6 @@
         ./dev
         ./neovim
         ./git
+        ./bash
     ];
 }
