@@ -3,7 +3,7 @@
 in {
     imports = [
         ./../../modules
-        ./../../modules/android-proxy
+        ./android-proxy
     ];
 
     modules = {

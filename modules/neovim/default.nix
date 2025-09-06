@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }: let
     cfg = config.modules.neovim;
     repo = cfg.config.repository;
-    isAndroid = builtins.pathExists /storage/emulated;
 in {
     options.modules.neovim = {
         enable = lib.mkEnableOption "Ensures Neovim is installed";
