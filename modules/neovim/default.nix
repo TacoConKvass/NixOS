@@ -2,9 +2,6 @@
     cfg = config.modules.neovim;
     repo = cfg.config.repository;
     isAndroid = builtins.pathExists /storage/emulated;
-    at = index: list: builtins.elemAt list index;
-    pkgsAttr = if (isAndroid) then "packages" else "systemPackages";
-    scriptAttr = lib.splitString "." (if (isAndroid) then "build.activationAfter" else "system.activationScripts");
 in {
     options.modules.neovim = {
         enable = lib.mkEnableOption "Ensures Neovim is installed";
@@ -43,20 +40,19 @@ in {
     };
 
     config = lib.mkIf cfg.enable {
-        environment.${pkgsAttr} = ([ cfg.package pkgs.lua-language-server pkgs.nil ]
+        environment.systemPackages = ([ cfg.package pkgs.lua-language-server pkgs.nil ]
             ++ lib.optionals cfg.config.pull [ cfg.config.gitPackage ]
             ++ cfg.additionalPackages
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupNeovim = (if (!cfg.config.pull) then "" else
+        system.activationScripts.setupNeovim = (if (!cfg.config.pull) then "" else
         let
             configDir = "${cfg.config.user.home}/.config/nvim";
-            name = if (isAndroid) then "userName" else "name";
         in ''
             if [ ! -d ${configDir} ]; then
                echo "Pulling Neovim config..."
                ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${configDir}
-               chown --recursive ${cfg.config.user.${name}}:users ${configDir}
+               chown --recursive ${cfg.config.user.name}:${cfg.config.user.group} ${configDir}
             else
                 echo "Neovim config found..."
             fi

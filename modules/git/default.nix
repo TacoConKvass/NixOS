@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... } : let
     cfg = config.modules.git;
     gcm = "git-credential-manager";
-    isAndroid = builtins.pathExists /storage/emulated;
-    at = index: list: builtins.elemAt list index;
-    pkgsAttr = if (isAndroid) then "packages" else "systemPackages";
-    scriptAttr = lib.splitString "." (if (isAndroid) then "build.activationAfter" else "system.activationScripts");
 in {
     options.modules.git = {
         enable = lib.mkEnableOption "Enable Git";
@@ -49,16 +45,15 @@ in {
     };
 
     config = lib.mkIf (cfg.enable) {
-        environment.${pkgsAttr} = ([ cfg.package ]
+        environment.systemPackages = ([ cfg.package ]
             ++ (lib.optionals cfg.config.gcm.enable ([ pkgs.${gcm} ]
                 ++ lib.optionals (cfg.config.gcm.storeType == "gpg") [ pkgs.pass ]
             ))
         );
 
-        ${at 0 scriptAttr}.${at 1 scriptAttr}.setupGit = (if (!cfg.config.enable) then "" else
+        system.activationScripts.setupGit = (if (!cfg.config.enable) then "" else
             let
                 gitconfig = "${cfg.config.user.home}/.gitconfig";
-                name = if (isAndroid) then "userName" else "name";
             in ''
             if [ ! -f ${gitconfig} ]; then
                 echo "Creating Git config in ${cfg.config.user.home}..."
@@ -74,7 +69,7 @@ in {
                 cacheOptions = "${cfg.config.gcm.cacheOptions}"
             '') + ''
             ' > ${gitconfig}
-                chown ${cfg.config.user.${name}}:users ${gitconfig}
+                chown ${cfg.config.user.name}:${cfg.config.user.group} ${gitconfig}
             else
                 echo "Git config found..."
             fi

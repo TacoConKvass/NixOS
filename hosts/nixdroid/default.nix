@@ -1,7 +1,10 @@
 { config, pkgs, ... } : let
     user = config.user;
 in {
-    imports = [ ./../../modules ];
+    imports = [
+        ./../../modules
+        ./../../modules/android-proxy
+    ];
 
     modules = {
         dev.zig = true;
@@ -31,7 +34,7 @@ in {
         };
     };
 
-    environment.packages = [
+    environment.systemPackages = [
         pkgs.fastfetch
         pkgs.ncurses
     ];

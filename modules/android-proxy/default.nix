@@ -17,6 +17,14 @@ in {
                 description = "Proxy to Nix-on-droid's `build.activationAfter`";
             };
         };
+        user = {
+            name = lib.mkOption {
+                type = lib.types.str;
+                default = config.user.userName;
+                description = "Proxy to Nix-on-droid's `user.userName`";
+                readOnly = true;
+            };
+        };
     };
 
     config = {

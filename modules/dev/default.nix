@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... } : let 
     cfg = config.modules.dev;
     dotnetPkgs = pkgs.dotnetCorePackages;
-    pkgsAttr = if (builtins.hasAttr "packages" config.environment) then "packages" else "systemPackages";
 in {
     options.modules.dev = {
         zig = lib.mkEnableOption "Ensure the Zig compiler is installed";
@@ -10,7 +9,7 @@ in {
     };
 
     config = {
-        environment.${pkgsAttr} = ([]
+        environment.systemPackages = ([]
             ++ (lib.optionals cfg.zig [ pkgs.zig ])
             ++ (lib.optionals cfg.rust [ pkgs.cargo pkgs.rustc pkgs.gcc ])
             ++ (lib.optionals cfg.cSharp [(
