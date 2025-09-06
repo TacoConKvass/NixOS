@@ -1,5 +1,5 @@
 { config, pkgs, ... } : let
-    homeDir = config.user.home;
+    user = config.user;
 in {
     imports = [ ./../../modules ];
 
@@ -15,7 +15,7 @@ in {
                     url = "https://github.com/TacoConKvass/nvim";
                     branch = "lazy";
                 };
-                home = homeDir;
+                user = user;
             };
             additionalPackages = [ pkgs.ripgrep ];
         };
@@ -26,11 +26,16 @@ in {
                 enable = true;
                 username = "TacoConKvass";
                 email = "e_frun@o2.pl";
-                home = homeDir;
+                user = user;
             };
         };
     };
-    
+
+    environment.packages = [
+        pkgs.fastfetch
+        pkgs.ncurses
+    ];
+
     system.stateVersion = "24.05";
 
     environment.etcBackupExtension = ".bak";
