@@ -33,8 +33,7 @@ in {
                 echo ".bashrc found..."
             else
                 echo "Generating ${file}..."
-                echo "export PS1=\"\n⎧ taco ❱ \w\n⎩ $ \"
-
+                echo "PS1=\"\n⎧ taco ❱ \[\$(tput setaf 104)\]\w \[\$(tput sgr0)\]\n⎩ $ \"
             function lastcommand {
                 history | tail -1 | cut -c 8-
             }
