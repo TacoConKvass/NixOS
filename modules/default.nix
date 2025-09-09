@@ -3,7 +3,6 @@
         ./dev
         ./neovim
         ./git
-        ./bash
         ./dotfiles
     ];
 }

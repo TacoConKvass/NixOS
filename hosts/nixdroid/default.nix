@@ -11,10 +11,9 @@ in {
         dev.rust = true;
 
         dotfiles = {
-            definitions.Bash = {
-                path = "bashrc";
+            definitions." .bashrc" = {
+                path = ".bashrc";
                 source = ./../../dotfiles/.bashrc;
-
             };
             inherit user;
         };
