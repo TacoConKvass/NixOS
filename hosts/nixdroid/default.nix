@@ -52,7 +52,8 @@ in {
     system.stateVersion = "24.05";
 
     environment.etcBackupExtension = ".bak";
-    
+    environment.motd = "";
+
     nix.extraOptions = ''
         experimental-features = nix-command flakes
     '';
