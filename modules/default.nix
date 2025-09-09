@@ -4,5 +4,6 @@
         ./neovim
         ./git
         ./bash
+        ./dotfiles
     ];
 }

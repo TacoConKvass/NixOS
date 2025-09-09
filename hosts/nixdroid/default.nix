@@ -10,13 +10,12 @@ in {
         dev.zig = true;
         dev.rust = true;
 
-        bash = {
-            enable = true;
-            additionalConfig = ''
-                alias nix-switch=\"nix-on-droid switch --flake\"
-            '';
-            preSetup = "set +u";
-            postSetup = "set -u";
+        dotfiles = {
+            definitions.Bash = {
+                path = "bashrc";
+                source = ./../../dotfiles/.bashrc;
+
+            };
             inherit user;
         };
 
