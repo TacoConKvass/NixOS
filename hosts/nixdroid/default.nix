@@ -1,4 +1,4 @@
-{ config, pkgs, ... } : let
+{ config, pkgs, unstable, ... } : let
     user = config.user;
 in {
     imports = [
@@ -7,7 +7,11 @@ in {
     ];
 
     modules = {
-        dev.zig = true;
+        dev.zig = {
+            enable = true;
+            package = unstable.zig_0_15;
+            languageServer = unstable.zls_0_15;
+        };
         dev.rust = true;
 
         dotfiles = {
