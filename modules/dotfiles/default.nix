@@ -15,11 +15,6 @@ in {
                         type = types.path;
                         description = "Path to the source file";
                     };
-                    additionalLines = lib.mkOption {
-                        type = types.str;
-                        default = "";
-                        description = "Additional lines to be added to the config";
-                    };
                     preSetup = lib.mkOption {
                         type = types.str;
                         default = "";
@@ -32,6 +27,8 @@ in {
                     };
                 };
             });
+            default = {};
+            description = "Dotfile definitions";
         };
         user = lib.mkOption {
             type = types.attrs;
@@ -57,10 +54,7 @@ in {
                 else
                 mkdir -p ${filePath}
                 rm -rf ${filePath}
-                cat ${sourceFile} > ${filePath}
-                cat >> ${filePath} << 'EOF'
-                ${dotfile.value.additionalLines}
-                EOF
+                cp --copy-contents ${sourceFile} ${filePath}
                 fi
                 ${dotfile.value.postSetup}
             '';
