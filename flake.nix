@@ -37,6 +37,9 @@
                     wsl.enable = true;
                 }
             ];
+            specialArgs = {
+                unstable = inputs.pkgs-unstable.legacyPackages.${x86};
+            };
         };
     };
 }
