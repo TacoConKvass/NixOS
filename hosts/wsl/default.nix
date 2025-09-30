@@ -1,4 +1,4 @@
-{ config, unstable, ... } : let
+{ config, unstable, pkgs, ...} : let
     user = config.users.users.nixos;
 in {
     imports = [ ./../../modules ];
@@ -11,6 +11,19 @@ in {
         };
         dev.rust = true;
         dev.cSharp = true;
+
+        dotfiles = {
+            definitions." .bashrc" = {
+                path = ".bashrc";
+                source = ./../../dotfiles/.bashrc;
+            };
+            definitions." ghostty" = {
+                path = ".config/ghostty";
+                source = ./../../dotfiles/ghostty;
+                overwrite = true;
+            };
+            inherit user;
+        };
 
         neovim = {
             enable = true;
@@ -38,6 +51,11 @@ in {
             };
         };
     };
+
+    environment.systemPackages = [
+        pkgs.fastfetch
+        pkgs.ghostty
+    ];
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
