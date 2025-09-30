@@ -25,6 +25,11 @@ in {
                         default = "";
                         description = "Bash script to execute after this dotfile is set up";
                     };
+                    overwrite = lib.mkOption {
+                        type = types.bool;
+                        default = false;
+                        description = "Always overwrite the dotfile";
+                    };
                 };
             });
             default = {};
@@ -44,17 +49,19 @@ in {
             };
             filePath = "${cfg.user.home}/${dotfile.value.path}";
             sourceFile = "${dotfile.value.source}";
+            shortcircut = if dotfile.value.overwrite then "&& false" else "";
         in {
             name = "setup${dotfile.name}";
             value = ''
                 # ${dotfile.value.source}
                 ${dotfile.value.preSetup}
-                if [ -f ${filePath} ]; then
+                if [ -f ${filePath} ] ${shortcircut}; then
                 echo ${dotfile.name} config found...
                 else
                 mkdir -p ${filePath}
                 rm -rf ${filePath}
-                cp --copy-contents ${sourceFile} ${filePath}
+                cp -rf ${sourceFile} ${filePath}
+                chown -R ${cfg.user.name} ${filePath}
                 fi
                 ${dotfile.value.postSetup}
             '';
