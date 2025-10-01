@@ -13,11 +13,11 @@ in {
         dev.cSharp = true;
 
         dotfiles = {
-            definitions." .bashrc" = {
+            definitions.bashrc = {
                 path = ".bashrc";
                 source = ./../../dotfiles/.bashrc;
             };
-            definitions." ghostty" = {
+            definitions.ghostty = {
                 path = ".config/ghostty";
                 source = ./../../dotfiles/ghostty;
                 overwrite = true;
