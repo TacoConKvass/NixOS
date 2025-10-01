@@ -58,6 +58,7 @@ in {
                 if [ -f ${filePath} ] ${shortcircut}; then
                 echo ${dotfile.name} config found...
                 else
+                echo "setting up ${dotfile.name}..."
                 mkdir -p ${filePath}
                 rm -rf ${filePath}
                 cp -rf ${sourceFile} ${filePath}
