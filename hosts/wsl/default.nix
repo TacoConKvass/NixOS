@@ -15,7 +15,7 @@ in {
         dotfiles = {
             definitions.bashrc = {
                 path = ".bashrc";
-                source = ./../../dotfiles/.bashrc;
+                source = ./../../dotfiles/bash;
             };
             definitions.ghostty = {
                 path = ".config/ghostty";

@@ -1,9 +1,11 @@
 font-size = 11
 
 background = #080808
-background-opacity = .7
-background-blur = 40
+# background-opacity = .7
+# background-blur = 40
 window-decoration = none
+window-padding-x = 8
+window-padding-y = 8
 
 # Split controls
 keybind = alt+w=new_split:auto

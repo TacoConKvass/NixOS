@@ -36,6 +36,6 @@ in {
         modules.neovim.additionalPackages = []
             ++ (lib.optionals cfg.zig.enable [ cfg.zig.languageServer])
             ++ (lib.optionals cfg.rust [ pkgs.rust-analyzer ])
-            ++ (lib.optionals cfg.cSharp [ pkgs.omnisharp-roslyn ]);
+            ++ (lib.optionals cfg.cSharp [ pkgs.roslyn-ls ]);
     };
 }
