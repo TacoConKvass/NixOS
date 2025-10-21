@@ -1,0 +1,27 @@
+input {
+    keyboard {
+        // xkb { }
+        numlock
+    }
+}
+
+output "Smithay Winit Unknown" {
+    mode "1920x1080@60"
+    scale 0.8
+}
+
+binds {
+    // help
+    Mod+Shift+Slash  { show-hotkey-overlay; }
+
+    // Apps
+    Mod+T            { spawn "ghostty"; }
+    Mod+Return       { spawn "fuzzel"; }
+    // Mod+Return       { spawn "wofi" "--show=run"; }
+
+    // Manage windows
+    Mod+Q            { close-window; }
+    Mod+F            { maximize-column; }
+
+    Mod+Shift+Q      { quit; }
+}

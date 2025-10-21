@@ -12,6 +12,11 @@
         pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
+
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "pkgs-unstable";
+        };
     };
 
     outputs = { ... } @ inputs : let
@@ -39,6 +44,21 @@
             ];
             specialArgs = {
                 unstable = inputs.pkgs-unstable.legacyPackages.${x86};
+            };
+        };
+
+        nixosConfigurations.desktop = inputs.pkgs-25-05.lib.nixosSystem {
+            system = x86;
+            modules = [
+                ./hosts/desktop
+                inputs.wsl.nixosModules.default {
+                    system.stateVersion = "24.11";
+                    wsl.enable = true;
+                }
+            ];
+            specialArgs = {
+                unstable = inputs.pkgs-unstable.legacyPackages.${x86};
+                zen-browser = inputs.zen-browser.packages.${x86};
             };
         };
     };

@@ -37,6 +37,27 @@
         "type": "github"
       }
     },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "zen-browser",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752603129,
+        "narHash": "sha256-S+wmHhwNQ5Ru689L2Gu8n1OD6s9eU9n9mD827JNR+kw=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e8c19a3cec2814c754f031ab3ae7316b64da085b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nix-formatter-pack": {
       "inputs": {
         "nixpkgs": [
@@ -242,7 +263,8 @@
         "nixdroid-pkgs": "nixdroid-pkgs",
         "pkgs-25-05": "pkgs-25-05",
         "pkgs-unstable": "pkgs-unstable",
-        "wsl": "wsl"
+        "wsl": "wsl",
+        "zen-browser": "zen-browser"
       }
     },
     "scss-reset": {
@@ -278,6 +300,27 @@
         "owner": "nix-community",
         "ref": "2411.6.0",
         "repo": "NixOS-WSL",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": [
+          "pkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761020606,
+        "narHash": "sha256-XdDpTJHjFqZJ3ss6xzTWYyi3PEObX2fs+kW0Wg/rNDk=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "637cb6167da4dbf8ef7f5a50e69933c4f9796095",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }
