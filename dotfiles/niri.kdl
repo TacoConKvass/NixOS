@@ -17,11 +17,18 @@ binds {
     // Apps
     Mod+T            { spawn "ghostty"; }
     Mod+Return       { spawn "fuzzel"; }
-    // Mod+Return       { spawn "wofi" "--show=run"; }
 
     // Manage windows
+    Mod+K            { focus-column-right; }
+    Mod+J            { focus-column-left; }
+    Mod+Shift+K      { focus-workspace-up; }
+    Mod+Shift+J      { focus-workspace-down; }
     Mod+Q            { close-window; }
     Mod+F            { maximize-column; }
 
     Mod+Shift+Q      { quit; }
+}
+
+hotkey-overlay {
+    hide-not-bound
 }
