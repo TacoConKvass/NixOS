@@ -26,6 +26,8 @@ binds {
     Mod+Q            { close-window; }
     Mod+F            { maximize-column; }
 
+    Ctrl+F1          { screenshot; }
+
     Mod+Shift+Q      { quit; }
 }
 
