@@ -56,10 +56,10 @@ in{
         pkgs.fastfetch
         pkgs.ghostty
 
-        pkgs.niri
+        unstable.niri
         pkgs.fuzzel
 
-        #zen-browser.twilight # Running it in WSL is not a great idea
+        zen-browser.twilight
     ];
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
