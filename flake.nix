@@ -13,10 +13,10 @@
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
 
-#        zen-browser = {
-#            url = "github:0xc000022070/zen-browser-flake";
-#            inputs.nixpkgs.follows = "pkgs-unstable";
-#        };
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "pkgs-unstable";
+        };
     };
 
     outputs = { ... } @ inputs : let
@@ -58,7 +58,7 @@
             ];
             specialArgs = {
                 unstable = inputs.pkgs-unstable.legacyPackages.${x86};
-#                zen-browser = inputs.zen-browser.packages.${x86};
+                zen-browser = inputs.zen-browser.packages.${x86};
             };
         };
     };
