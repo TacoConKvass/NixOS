@@ -47,13 +47,14 @@
             };
         };
 
-        nixosConfigurations.desktop = inputs.pkgs-25-05.lib.nixosSystem {
+        nixosConfigurations.HAL11 = inputs.pkgs-25-05.lib.nixosSystem {
             system = x86;
             modules = [
-                ./hosts/desktop
+                ./hosts/HAL11
                 inputs.wsl.nixosModules.default {
                     system.stateVersion = "24.11";
                     wsl.enable = true;
+                    wsl.useWindowsDriver = true;
                 }
             ];
             specialArgs = {

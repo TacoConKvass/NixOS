@@ -52,6 +52,8 @@ in{
         };
     };
 
+    networking.hostName = "HAL11";
+
     environment.systemPackages = [
         pkgs.fastfetch
         pkgs.ghostty
