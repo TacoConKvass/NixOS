@@ -48,12 +48,10 @@ in {
         let
             configDir = "${cfg.config.user.home}/.config/nvim";
         in ''
+            echo "setting up ${configDir}..."
             if [ ! -d ${configDir} ]; then
-               echo "Pulling Neovim config..."
                ${pkgs.git}/bin/git clone -b ${repo.branch} ${repo.url} ${configDir}
                chown --recursive ${cfg.config.user.name}:${cfg.config.user.group} ${configDir}
-            else
-                echo "Neovim config found..."
             fi
         '');
     };

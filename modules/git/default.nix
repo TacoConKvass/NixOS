@@ -55,8 +55,8 @@ in {
             let
                 gitconfig = "${cfg.config.user.home}/.gitconfig";
             in ''
+            echo "setting up ${gitconfig}..."
             if [ ! -f ${gitconfig} ]; then
-                echo "Creating Git config in ${cfg.config.user.home}..."
                 echo '
             [user]
                 name = "${cfg.config.username}"
@@ -70,8 +70,6 @@ in {
             '') + ''
             ' > ${gitconfig}
                 chown ${cfg.config.user.name}:${cfg.config.user.group} ${gitconfig}
-            else
-                echo "Git config found..."
             fi
         '');
     };
