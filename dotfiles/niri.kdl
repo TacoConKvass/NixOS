@@ -6,29 +6,38 @@ input {
 }
 
 output "Smithay Winit Unknown" {
-    mode "1920x1080@60"
+    mode "1600x900@60"
     scale 0.8
 }
 
 binds {
     // help
-    Mod+Shift+Slash  { show-hotkey-overlay; }
+    Alt+Shift+Slash { show-hotkey-overlay; }
 
     // Apps
-    Mod+T            { spawn "ghostty"; }
-    Mod+Return       { spawn "fuzzel"; }
+    Alt+T           { spawn "ghostty"; }
+    Alt+Return      { spawn "fuzzel"; }
 
     // Manage windows
-    Mod+K            { focus-column-right; }
-    Mod+J            { focus-column-left; }
-    Mod+Shift+K      { focus-workspace-up; }
-    Mod+Shift+J      { focus-workspace-down; }
-    Mod+Q            { close-window; }
-    Mod+F            { maximize-column; }
+    Alt+L           { focus-column-right; }
+    Alt+H           { focus-column-left; }
+    Ctrl+L          { swap-window-right; }
+    Ctrl+H          { swap-window-left; }
 
-    Ctrl+F1          { screenshot; }
+    Ctrl+K          { move-column-to-workspace-up; }
+    Ctrl+J          { move-column-to-workspace-down; }
+    Alt+Shift+K     { focus-workspace-up; }
+    Alt+Shift+J     { focus-workspace-down; }
 
-    Mod+Shift+Q      { quit; }
+    Alt+F           { maximize-column; }
+    Alt+Shift+F     { fullscreen-window; }
+
+    Alt+Q           { close-window; }
+
+    // Misc
+    Ctrl+F1         { screenshot; }
+
+    Alt+Shift+Q     { quit; }
 }
 
 hotkey-overlay {
