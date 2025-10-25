@@ -1,7 +1,7 @@
 { config, pkgs, unstable, zen-browser, ... } : let
     user = config.users.users.nixos;
 in{
-    imports = [ ./../../modules ];
+    imports = [ ./../modules ];
 
     modules = {
         dev.zig = {
@@ -15,11 +15,11 @@ in{
         dotfiles = {
             definitions.bashrc = {
                 path = ".bashrc";
-                source = ./../../dotfiles/bash;
+                source = ./../dotfiles/bash;
             };
             definitions.ghostty = {
                 path = ".config/ghostty";
-                source = ./../../dotfiles/ghostty;
+                source = ./../dotfiles/ghostty;
                 overwrite = true;
             };
             inherit user;

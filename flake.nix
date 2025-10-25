@@ -26,31 +26,17 @@
         nixOnDroidConfigurations.default = inputs.nixdroid.lib.nixOnDroidConfiguration {
             pkgs = import inputs.pkgs-25-05 { system = arm; };
             modules = [
-                ./hosts/nixdroid
+                ./hosts/nixdroid.nix
             ];
             extraSpecialArgs = {
                 unstable = inputs.pkgs-unstable.legacyPackages.${arm};
             };
         };
 
-        nixosConfigurations.wsl = inputs.pkgs-25-05.lib.nixosSystem {
-            system = x86;
-            modules = [
-                ./hosts/wsl
-                inputs.wsl.nixosModules.default {
-                    system.stateVersion = "24.11";
-                    wsl.enable = true;
-                }
-            ];
-            specialArgs = {
-                unstable = inputs.pkgs-unstable.legacyPackages.${x86};
-            };
-        };
-
         nixosConfigurations.HAL11 = inputs.pkgs-25-05.lib.nixosSystem {
             system = x86;
             modules = [
-                ./hosts/HAL11
+                ./hosts/HAL11.nix
                 inputs.wsl.nixosModules.default {
                     system.stateVersion = "24.11";
                     wsl.enable = true;
