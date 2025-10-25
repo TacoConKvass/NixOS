@@ -1,6 +1,7 @@
 { config, pkgs, unstable, zen-browser, ... } : let
     user = config.users.users.nixos;
-in{
+    home = user.home;
+in {
     imports = [ ./../modules ];
 
     modules = {
@@ -11,19 +12,6 @@ in{
         };
         dev.rust = true;
         dev.cSharp = true;
-
-        dotfiles = {
-            definitions.bashrc = {
-                path = ".bashrc";
-                source = ./../dotfiles/bash;
-            };
-            definitions.ghostty = {
-                path = ".config/ghostty";
-                source = ./../dotfiles/ghostty;
-                overwrite = true;
-            };
-            inherit user;
-        };
 
         neovim = {
             enable = true;
@@ -50,6 +38,11 @@ in{
                 user = user;
             };
         };
+    };
+
+    files = {
+        "${home}/.bashrc".source = ./../dotfiles/bash;
+        "${home}/.config/ghostty/config".source = ./../dotfiles/ghostty;
     };
 
     networking.hostName = "HAL11";
