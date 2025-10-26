@@ -1,11 +1,12 @@
 { config, pkgs, unstable, ... } : let
     user = config.user;
+    home = user.home;
 in {
     imports = [
-        ./../../modules
-        ./android-proxy
+        ./../modules
+        ./android-proxy.nix
     ];
-
+    
     modules = {
         dev.zig = {
             enable = true;
@@ -13,14 +14,6 @@ in {
             languageServer = unstable.zls_0_15;
         };
         dev.rust = true;
-
-        dotfiles = {
-            definitions.bashrc = {
-                path = ".bashrc";
-                source = ./../../dotfiles/bash;
-            };
-            inherit user;
-        };
 
         neovim = {
             enable = true;
@@ -44,6 +37,10 @@ in {
                 user = user;
             };
         };
+    };
+    
+    files = {
+        "${home}/.bashrc".source = ./../dotfiles/bash;
     };
 
     environment.systemPackages = [

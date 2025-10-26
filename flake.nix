@@ -23,7 +23,7 @@
         arm = "aarch64-linux";
         x86 = "x86_64-linux";
     in {
-        nixOnDroidConfigurations.default = inputs.nixdroid.lib.nixOnDroidConfiguration {
+        nixOnDroidConfigurations.nixdroid = inputs.nixdroid.lib.nixOnDroidConfiguration {
             pkgs = import inputs.pkgs-25-05 { system = arm; };
             modules = [
                 ./hosts/nixdroid.nix
