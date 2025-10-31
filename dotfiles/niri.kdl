@@ -12,6 +12,10 @@ output "Smithay Winit Unknown" {
     scale 0.8
 }
 
+spawn-sh-at-startup "swaybg --image ~/.config/wallpaper.png"
+// spawn-at-startup "waybar"
+prefer-no-csd
+
 binds {
     // help
     Alt+Shift+Slash { show-hotkey-overlay; }
@@ -33,6 +37,8 @@ binds {
 
     Alt+Minus       { set-column-width "-10%"; }
     Alt+Equal       { set-column-width "+10%"; }
+    Alt+Shift+Minus { set-window-height "-10%"; }
+    Alt+Shift+Equal { set-window-height "+10%"; }
 
     Alt+F           { maximize-column; }
     Alt+Shift+F     { fullscreen-window; }
