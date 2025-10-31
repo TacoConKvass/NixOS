@@ -1,6 +1,8 @@
 input {
     keyboard {
-        // xkb { }
+        xkb {
+            layout "pl"
+        }
         numlock
     }
 }
@@ -28,6 +30,9 @@ binds {
     Ctrl+J          { move-column-to-workspace-down; }
     Alt+Shift+K     { focus-workspace-up; }
     Alt+Shift+J     { focus-workspace-down; }
+
+    Alt+Minus       { set-column-width "-10%"; }
+    Alt+Equal       { set-column-width "+10%"; }
 
     Alt+F           { maximize-column; }
     Alt+Shift+F     { fullscreen-window; }
