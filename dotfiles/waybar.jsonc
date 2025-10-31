@@ -1,0 +1,30 @@
+{
+    "layer": "bottom",
+    "height": 34,
+    "width": 1800,
+    "position": "top",
+    "margin-top": 6,
+    "modules-left": [
+        "niri/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio"
+    ],
+    "clock": {
+        "format": "{:%d. %b %y - %H:%M}",
+        "tooltip": false
+    },
+    "niri/workspaces": {
+        "format": "{icon}",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}",
+        "tooltip": false,
+        "on-click": ""
+    },
+    "reload_style_on_change": true
+}

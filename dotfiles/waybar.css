@@ -1,0 +1,32 @@
+window#waybar.top {
+    background: rgba(10, 10, 10, 0.35);
+    border-radius: 20px;
+    margin: 0px 10px;
+    color: #fff;
+}
+#pulseaudio {
+    min-width: 50px;
+}
+
+#workspaces button {
+    color: #fff;
+    margin: 0px 3px;
+    padding: 5px;
+}
+
+#workspaces button.focused {
+    border-bottom: 3px solid #fff;
+    border-radius: 5px;
+}
+
+#workspaces button.hovered {
+    border-bottom: 3px solid #fff;
+    border-radius: 5px;
+}
+
+#clock {
+    /* background: rgba(, 250, 250, 1.0); */
+    color: #fff;
+    padding: 0px 10px;
+}
+
