@@ -13,7 +13,7 @@ output "Smithay Winit Unknown" {
 }
 
 spawn-sh-at-startup "swaybg --image ~/.config/wallpaper.png"
-// spawn-at-startup "waybar"
+spawn-at-startup "waybar"
 prefer-no-csd
 
 binds {
