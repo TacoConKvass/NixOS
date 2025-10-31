@@ -8,32 +8,32 @@
             inputs.nixpkgs.follows = "nixdroid-pkgs";
         };
 
-        pkgs-25-05.url = "github:NixOS/nixpkgs/nixos-25.05";
-        pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+        stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+        unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
 
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
-            inputs.nixpkgs.follows = "pkgs-unstable";
+            inputs.nixpkgs.follows = "unstable";
         };
     };
 
-    outputs = { ... } @ inputs : let
+    outputs = { stable, unstable, ... } @ inputs : let
         arm = "aarch64-linux";
         x86 = "x86_64-linux";
     in {
         nixOnDroidConfigurations.nixdroid = inputs.nixdroid.lib.nixOnDroidConfiguration {
-            pkgs = import inputs.pkgs-25-05 { system = arm; };
+            pkgs = import inputs.stable { system = arm; };
             modules = [
                 ./hosts/nixdroid.nix
             ];
             extraSpecialArgs = {
-                unstable = inputs.pkgs-unstable.legacyPackages.${arm};
+                unstable = unstable.legacyPackages.${arm};
             };
         };
 
-        nixosConfigurations.HAL11 = inputs.pkgs-25-05.lib.nixosSystem {
+        nixosConfigurations.HAL11 = stable.lib.nixosSystem {
             system = x86;
             modules = [
                 ./hosts/HAL11.nix
@@ -44,7 +44,7 @@
                 }
             ];
             specialArgs = {
-                unstable = inputs.pkgs-unstable.legacyPackages.${x86};
+                unstable = inputs.unstable.legacyPackages.${x86};
                 zen-browser = inputs.zen-browser.packages.${x86};
             };
         };
