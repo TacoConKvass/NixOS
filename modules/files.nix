@@ -41,9 +41,11 @@ in {
                 ${opts.preSetup}
                 echo "setting up ${path}..."
                 if [[ ! -f ${path} ]] || ${overwrite}; then
-                    echo "copying ${path} from the nix-store..."
-                    mkdir -p ${path}
+                    if [[ ! -f ${path} ]]; then
+                        mkdir -p ${path}
+                    fi
                     rm -rf ${path}
+                    echo "-   copying ${path} from the nix-store..."
                     cp -rf ${opts.source} ${path}
                 fi
                 ${opts.postSetup}
