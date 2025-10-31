@@ -17,6 +17,9 @@ in {
         "${home}/.bashrc".source = ./../dotfiles/bash;
         "${home}/.config/ghostty/config".source = ./../dotfiles/ghostty;
         "${home}/.config/niri/config.kdl".source = ./../dotfiles/niri.kdl;
+        "${home}/.config/waybar/style.css".source = ./../dotfiles/waybar.css;
+        "${home}/.config/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
+        "${home}/.config/wallpaper.png".source = ./../dotfiles/wallpaper.png;
     };
 
     modules.neovim = {
