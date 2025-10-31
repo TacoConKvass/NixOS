@@ -37,10 +37,12 @@
             system = x86;
             modules = [
                 ./hosts/HAL11.nix
+                ./users/taco.nix
                 inputs.wsl.nixosModules.default {
                     system.stateVersion = "24.11";
                     wsl.enable = true;
                     wsl.useWindowsDriver = true;
+                    wsl.defaultUser = "taco";
                 }
             ];
             specialArgs = {

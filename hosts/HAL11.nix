@@ -1,48 +1,14 @@
-{ config, pkgs, unstable, zen-browser, ... } : let
-    user = config.users.users.nixos;
-    home = user.home;
-in {
+{ pkgs, unstable, zen-browser, ... } : {
     imports = [ ./../modules ];
 
-    modules = {
-        dev.zig = {
+    modules.dev = {
+        zig = {
             enable = true;
             package = unstable.zig_0_15;
             languageServer = unstable.zls_0_15;
         };
-        dev.rust = true;
-        dev.cSharp = true;
-
-        neovim = {
-            enable = true;
-            config = {
-                pull = true;
-                repository = {
-                    url = "https://github.com/TacoConKvass/nvim";
-                    branch = "lazy";
-                };
-                user = user;
-            };
-        };
-
-        git = {
-            enable = true;
-            config = {
-                enable = true;
-                username = "TacoConKvass";
-                email = "e_frun@o2.pl";
-                gcm = {
-                    enable = true;
-                    storeType = "gpg";
-                };
-                user = user;
-            };
-        };
-    };
-
-    files = {
-        "${home}/.bashrc".source = ./../dotfiles/bash;
-        "${home}/.config/ghostty/config".source = ./../dotfiles/ghostty;
+        rust = true;
+        cSharp = true;
     };
 
     networking.hostName = "HAL11";
@@ -53,6 +19,8 @@ in {
 
         unstable.niri
         pkgs.fuzzel
+        pkgs.waybar
+        pkgs.swaybg
 
         zen-browser.twilight
     ];
