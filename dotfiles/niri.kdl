@@ -25,25 +25,33 @@ binds {
     Alt+Return      { spawn "fuzzel"; }
 
     // Manage windows
-    Alt+L           { focus-column-right; }
-    Alt+H           { focus-column-left; }
-    Ctrl+L          { swap-window-right; }
-    Ctrl+H          { swap-window-left; }
+    Alt+L           { focus-window-down-or-column-right; }
+    Alt+H           { focus-window-up-or-column-left; }
+    Alt+Shift+L     { consume-or-expel-window-right; }
+    Alt+Shift+H     { consume-or-expel-window-left; }
 
-    Ctrl+K          { move-column-to-workspace-up; }
-    Ctrl+J          { move-column-to-workspace-down; }
-    Alt+Shift+K     { focus-workspace-up; }
-    Alt+Shift+J     { focus-workspace-down; }
+    Alt+K           { focus-workspace-up; }
+    Alt+J           { focus-workspace-down; }
+    Alt+Shift+K     { move-column-to-workspace-up; }
+    Alt+Shift+J     { move-column-to-workspace-down; }
 
-    Alt+Minus       { set-column-width "-10%"; }
-    Alt+Equal       { set-column-width "+10%"; }
-    Alt+Shift+Minus { set-window-height "-10%"; }
-    Alt+Shift+Equal { set-window-height "+10%"; }
+    Alt+Minus       { set-column-width "-2.5%"; }
+    Alt+Equal       { set-column-width "+2.5%"; }
+    Alt+Shift+Minus { set-window-height "-2.5%"; }
+    Alt+Shift+Equal { set-window-height "+2.5%"; }
 
     Alt+F           { maximize-column; }
     Alt+Shift+F     { fullscreen-window; }
 
     Alt+Q           { close-window; }
+
+    // Floating windows...
+    Alt+F2          { toggle-window-floating; }
+    Mod5+Shift+L    { spawn "niri" "msg" "action" "move-floating-window" "-x" "+10"; }
+    Mod5+Shift+H    { spawn "niri" "msg" "action" "move-floating-window" "-x" "-10"; }
+    Mod5+Shift+J    { spawn "niri" "msg" "action" "move-floating-window" "-y" "+10"; }
+    Mod5+Shift+K    { spawn "niri" "msg" "action" "move-floating-window" "-y" "-10"; }
+    Mod5+Return     { switch-focus-between-floating-and-tiling; }
 
     // Misc
     Ctrl+F1         { screenshot; }
