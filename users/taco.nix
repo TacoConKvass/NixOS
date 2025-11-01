@@ -13,13 +13,14 @@ in {
         shell = pkgs.bash;
     };
 
-    files = {
+    files = let cfg = "${home}/.config"; in {
         "${home}/.bashrc".source = ./../dotfiles/bash;
-        "${home}/.config/ghostty/config".source = ./../dotfiles/ghostty;
-        "${home}/.config/niri/config.kdl".source = ./../dotfiles/niri.kdl;
-        "${home}/.config/waybar/style.css".source = ./../dotfiles/waybar.css;
-        "${home}/.config/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
-        "${home}/.config/wallpaper.png".source = ./../dotfiles/wallpaper.png;
+        "${cfg}/ghostty/config".source = ./../dotfiles/ghostty;
+        "${cfg}/niri/config.kdl".source = ./../dotfiles/niri.kdl;
+        "${cfg}/waybar/style.css".source = ./../dotfiles/waybar.css;
+        "${cfg}/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
+        "${cfg}/wallpaper.png".source = ./../dotfiles/wallpaper.png;
+        "${cfg}/fuzzel/fuzzel.ini".source = ./../dotfiles/fuzzel.ini;
     };
 
     modules.neovim = {
