@@ -4,14 +4,21 @@ window#waybar.top {
     margin: 0px 10px;
     color: #fff;
 }
+
 #pulseaudio {
     min-width: 50px;
+    margin: 0px 10px;
+}
+
+#workspaces {
+    margin: 0px 8px;
 }
 
 #workspaces button {
+    min-width: 25px;
     color: #fff;
-    margin: 0px 3px;
-    padding: 5px;
+    margin: 0px 2px;
+    padding: 2px;
 }
 
 #workspaces button.focused {
@@ -19,14 +26,16 @@ window#waybar.top {
     border-radius: 5px;
 }
 
-#workspaces button.hovered {
+#workspaces button.selected {
+    background: rgba(10, 10, 10, .35);
     border-bottom: 3px solid #fff;
     border-radius: 5px;
 }
 
 #clock {
-    /* background: rgba(, 250, 250, 1.0); */
+    background: rgba(10, 10, 10, .35);
     color: #fff;
     padding: 0px 10px;
+    border-radius: 20px;
 }
 
