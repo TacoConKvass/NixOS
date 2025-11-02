@@ -1,12 +1,3 @@
-input {
-    keyboard {
-        xkb {
-            layout "pl"
-        }
-        numlock
-    }
-}
-
 output "Smithay Winit Unknown" {
     mode "1600x900@60"
     scale 0.8
@@ -15,6 +6,38 @@ output "Smithay Winit Unknown" {
 spawn-sh-at-startup "swaybg --image ~/.config/wallpaper.png"
 spawn-at-startup "waybar"
 prefer-no-csd
+
+window-rule {
+    geometry-corner-radius 15
+    clip-to-geometry true
+    draw-border-with-background false
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        width 6
+        active-gradient from="#0088AA" to="#AA8800" angle=45
+        inactive-color "#222222"
+    }
+}
+
+// Shadow behind floating windows
+window-rule {
+    match is-floating=true
+    match title="Fuzzel"
+
+    opacity 0.9
+
+    shadow {
+        on
+        spread 10
+        softness 100
+        color "#000"
+    }
+}
 
 binds {
     // help
@@ -61,4 +84,13 @@ binds {
 
 hotkey-overlay {
     hide-not-bound
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "pl"
+        }
+        numlock
+    }
 }
