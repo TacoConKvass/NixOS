@@ -13,16 +13,6 @@ in {
         shell = pkgs.bash;
     };
 
-    files = let cfg = "${home}/.config"; in {
-        "${home}/.bashrc".source = ./../dotfiles/bash;
-        "${cfg}/ghostty/config".source = ./../dotfiles/ghostty;
-        "${cfg}/niri/config.kdl".source = ./../dotfiles/niri.kdl;
-        "${cfg}/waybar/style.css".source = ./../dotfiles/waybar.css;
-        "${cfg}/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
-        "${cfg}/wallpaper.png".source = ./../dotfiles/wallpaper.png;
-        "${cfg}/fuzzel/fuzzel.ini".source = ./../dotfiles/fuzzel.ini;
-    };
-
     modules.neovim = {
         enable = true;
         config = {
@@ -47,5 +37,15 @@ in {
             };
             user = taco;
         };
+    };
+
+    files = let cfg = "${home}/.config"; in {
+        "${home}/.bashrc".source = ./../dotfiles/bash;
+        "${cfg}/ghostty/config".source = ./../dotfiles/ghostty;
+        "${cfg}/niri/config.kdl".source = ./../dotfiles/niri.kdl;
+        "${cfg}/waybar/style.css".source = ./../dotfiles/waybar.css;
+        "${cfg}/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
+        "${cfg}/wallpaper.png".source = ./../dotfiles/wallpaper.png;
+        "${cfg}/fuzzel/fuzzel.ini".source = ./../dotfiles/fuzzel.ini;
     };
 }

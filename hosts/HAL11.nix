@@ -15,13 +15,13 @@
 
     environment.systemPackages = [
         pkgs.fastfetch
-        pkgs.ghostty
 
         unstable.niri
         pkgs.fuzzel
         pkgs.waybar
         pkgs.swaybg
 
+        pkgs.ghostty
         zen-browser.twilight
     ];
 
