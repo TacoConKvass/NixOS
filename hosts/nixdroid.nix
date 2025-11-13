@@ -11,7 +11,7 @@ in {
         dev.zig = {
             enable = true;
             package = unstable.zig_0_15;
-            languageServer = unstable.zls_0_15;
+            lsp = unstable.zls_0_15;
         };
         dev.rust = true;
 

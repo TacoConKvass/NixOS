@@ -10,7 +10,7 @@ in {
                 default = pkgs.zig;
                 description = "Package to pull as the Zig compiler";
             };
-            languageServer = lib.mkOption {
+            lsp = lib.mkOption {
                 type = lib.types.package;
                 default = pkgs.zls;
                 description = "Package to pull as the Zig language server";
@@ -28,13 +28,14 @@ in {
                 dotnetPkgs.combinePackages [
                     dotnetPkgs.dotnet_8.sdk
                     dotnetPkgs.dotnet_9.sdk
+                    dotnetPkgs.sdk_10_0-bin
                     pkgs.dotnetPackages.Nuget
                 ]
             )])
         );
 
         modules.neovim.additionalPackages = []
-            ++ (lib.optionals cfg.zig.enable [ cfg.zig.languageServer])
+            ++ (lib.optionals cfg.zig.enable [ cfg.zig.lsp ])
             ++ (lib.optionals cfg.rust [ pkgs.rust-analyzer ])
             ++ (lib.optionals cfg.cSharp [ pkgs.roslyn-ls ]);
     };
