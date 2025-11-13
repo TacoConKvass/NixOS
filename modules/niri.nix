@@ -1,10 +1,10 @@
 { config, lib, pkgs, unstable, ... } : let
     types = lib.types;
-    cfg = config.feature.niri;
+    cfg = config.features.niri;
     mkPkgOption = description: default: lib.mkOption { type = types.package; inherit description; inherit default; };
 in {
-    options.feature.niri = {
-        enable = lib.mkEnableOption;
+    options.features.niri = {
+        enable = lib.mkEnableOption "Enable Niri WM";
         apps = lib.mkOption {
             type = types.listOf types.package;
             description = "Apps to make available";
