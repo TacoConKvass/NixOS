@@ -45,8 +45,10 @@ in {
                         mkdir -p ${path}
                     fi
                     rm -rf ${path}
-                    echo "-   copying ${path} from the nix-store..."
+                    echo "    - copying from the nix-store..."
                     cp -rf ${opts.source} ${path}
+                    chown :users ${path}
+                    chmod g+w ${path}
                 fi
                 ${opts.postSetup}
             '';
