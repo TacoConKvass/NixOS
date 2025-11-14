@@ -19,7 +19,7 @@
         ];
     };
 
-    networking.hostName = "HAL11";
+    networking.hostName = "HAL13";
 
     environment.systemPackages = [
         pkgs.fastfetch

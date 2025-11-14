@@ -46,6 +46,7 @@ in {
     environment.systemPackages = [
         pkgs.fastfetch
         pkgs.ncurses
+        pkgs.helix
     ];
 
     system.stateVersion = "24.05";

@@ -33,10 +33,10 @@
             };
         };
 
-        nixosConfigurations.HAL11 = stable.lib.nixosSystem {
+        nixosConfigurations.HAL13 = stable.lib.nixosSystem {
             system = x86;
             modules = [
-                ./hosts/HAL11.nix
+                ./hosts/HAL13.nix
                 ./users/taco.nix
                 inputs.wsl.nixosModules.default {
                     system.stateVersion = "24.11";
