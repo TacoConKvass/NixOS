@@ -11,7 +11,7 @@
         cSharp = true;
     };
 
-    features.niri = {
+    features.wm = {
         enable = true;
         apps = [
             pkgs.ghostty

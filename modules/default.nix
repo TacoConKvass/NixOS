@@ -4,6 +4,6 @@
         ./neovim
         ./git
         ./files.nix
-        ./niri.nix
+        ./wm.nix
     ];
 }

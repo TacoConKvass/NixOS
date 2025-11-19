@@ -47,5 +47,7 @@ in {
         "${cfg}/waybar/config.jsonc".source = ./../dotfiles/waybar.jsonc;
         "${cfg}/wallpaper.png".source = ./../dotfiles/wallpaper.png;
         "${cfg}/fuzzel/fuzzel.ini".source = ./../dotfiles/fuzzel.ini;
+        "${cfg}/gtk-3.0/gtk.css".source = ./../dotfiles/gtk.css;
+        "${cfg}/xfce4/xfconf/xfce-perchannel-xml/thunar.xml".source = ./../dotfiles/thunar.xml;
     };
 }
