@@ -11,6 +11,7 @@ in {
         group = "users";
         home = "/home/taco";
         shell = pkgs.bash;
+        packages = [ pkgs.nerd-fonts.jetbrains-mono ];
     };
 
     modules.neovim = {
