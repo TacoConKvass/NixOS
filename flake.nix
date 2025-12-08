@@ -8,7 +8,7 @@
             inputs.nixpkgs.follows = "nixdroid-pkgs";
         };
 
-        stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+        stable.url = "github:NixOS/nixpkgs/nixos-25.11";
         unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";

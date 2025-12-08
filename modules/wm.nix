@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... } : let
+{ config, lib, pkgs, ... } : let
     types = lib.types;
     cfg = config.features.wm;
     mkPkgOption = description: default: lib.mkOption { type = types.package; inherit description; inherit default; };
@@ -11,7 +11,7 @@ in {
             default = [];
         };
         packages = {
-            main = mkPkgOption "Main window manager package" unstable.niri;
+            main = mkPkgOption "Main window manager package" pkgs.niri;
             bar = mkPkgOption "Bar package" pkgs.waybar;
             launcher = mkPkgOption "App launcher" pkgs.fuzzel;
             background = mkPkgOption "Background utility" pkgs.swaybg;
@@ -19,7 +19,7 @@ in {
                 type = types.listOf types.package;
                 description = "File explorer packages";
                 default = [ 
-                    unstable.xfce.thunar-unwrapped 
+                    pkgs.xfce.thunar-unwrapped 
                     pkgs.xfce.xfconf
                 ];
             };
