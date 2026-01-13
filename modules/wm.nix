@@ -18,10 +18,12 @@ in {
             explorer = lib.mkOption {
                 type = types.listOf types.package;
                 description = "File explorer packages";
-                default = [ 
-                    pkgs.xfce.thunar-unwrapped 
-                    pkgs.xfce.xfconf
-                ];
+                default = [];
+            };
+            fonts = lib.mkOption {
+                type = types.listOf types.package;
+                description = "Fonts to install";
+                default = [];
             };
         };
     };
@@ -30,5 +32,7 @@ in {
         environment.systemPackages = with cfg.packages; [ 
             main bar launcher background
         ] ++ cfg.packages.explorer ++ cfg.apps;
+
+        fonts.packages = cfg.fonts.packages;
     };
 }
