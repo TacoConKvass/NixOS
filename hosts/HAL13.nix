@@ -1,21 +1,16 @@
-{ pkgs, unstable, zen-browser, ... } : {
+{ pkgs, zen-browser, ... } : {
     imports = [ ./../modules ];
 
-    modules.dev = {
-        zig = {
-            enable = true;
-            package = unstable.zig_0_15;
-            lsp = unstable.zls_0_15;
-        };
-        rust = true;
-        cSharp = true;
-    };
+    modules.dev.cSharp = true;
 
     features.wm = {
         enable = true;
         apps = [
-            pkgs.ghostty
+            pkgs.foot
             zen-browser.twilight
+        ];
+        fonts = [
+            pkgs.nerd-fonts.jetbrains-mono
         ];
     };
 
@@ -23,6 +18,7 @@
 
     environment.systemPackages = [
         pkgs.fastfetch
+        pkgs.helix
     ];
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
