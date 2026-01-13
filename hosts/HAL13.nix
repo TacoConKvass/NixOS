@@ -15,6 +15,7 @@
     };
 
     networking.hostName = "HAL13";
+    time.timeZone = "Europe/Warsaw";
 
     environment.systemPackages = [
         pkgs.fastfetch
