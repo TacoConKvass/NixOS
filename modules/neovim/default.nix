@@ -28,7 +28,7 @@ in {
         };
         package = lib.mkOption {
             type = lib.types.package;
-            default = pkgs.neovim;
+            default = pkgs.neovim-unwrapped;
             description = "Neovim package";
         };
         additionalPackages = lib.mkOption {
