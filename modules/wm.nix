@@ -20,11 +20,11 @@ in {
                 description = "File explorer packages";
                 default = [];
             };
-            fonts = lib.mkOption {
-                type = types.listOf types.package;
-                description = "Fonts to install";
-                default = [];
-            };
+        };
+        fonts = lib.mkOption {
+            type = types.listOf types.package;
+            description = "Fonts to install";
+            default = [];
         };
     };
 
