@@ -33,6 +33,6 @@ in {
             main bar launcher background
         ] ++ cfg.packages.explorer ++ cfg.apps;
 
-        fonts.packages = cfg.fonts.packages;
+        fonts.packages = cfg.fonts;
     };
 }
