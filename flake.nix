@@ -19,7 +19,7 @@
         };
     };
 
-    outputs = { stable, unstable, ... } @ inputs : let
+    outputs = { stable, unstable, self, ... } @ inputs : let
         arm = "aarch64-linux";
         x86 = "x86_64-linux";
     in {
@@ -34,6 +34,10 @@
         };
 
         nixosConfigurations.HAL13 = stable.lib.nixosSystem {
+            pkgs = import inputs.stable {
+                system = x86;
+                overlays = [ self.overlays.default ];
+            };
             system = x86;
             modules = [
                 ./hosts/HAL13.nix
@@ -49,6 +53,16 @@
                 unstable = inputs.unstable.legacyPackages.${x86};
                 zen-browser = inputs.zen-browser.packages.${x86};
             };
+        };
+
+        overlays.default = final: prev: {
+            niri = prev.niri.overrideAttrs(old: {
+                postPatch = ''
+                    substituteInPlace src/backend/winit.rs --replace \
+                        ".with_inner_size(LogicalSize::new(1280.0, 800.0))" \
+                        ".with_maximized(true).with_decorations(false)"
+                '';
+            });
         };
     };
 }
