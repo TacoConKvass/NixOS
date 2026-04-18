@@ -20,7 +20,7 @@
             pull = true;
             repository = "https://github.com/TacoConKvass/nvim";
             branch = "lazy";
-            user = users.users.taco;
+            user = inputs.config.users.users.taco;
         };
     };
 
