@@ -14,8 +14,17 @@
 
     time.timeZone = "Europe/Warsaw";
 
-    environment.systemPackages = [ 
-        pkgs.helix 
+    modules.neovim = {
+        enable = true;
+        config = {
+            pull = true;
+            repository = "https://github.com/TacoConKvass/nvim";
+            branch = "lazy";
+            user = users.users.taco;
+        };
+    };
+
+    environment.systemPackages = [
         pkgs.fastfetch
     ];
 
@@ -35,6 +44,7 @@
               ServerAliveInterval    60
               IPQoS                  throughput
               IdentityFile           /home/taco/.env/nixbuild
+              SetEnv                 NIXBUILDNET_REUSE_BUILD_FAILURES=0
         '';
         knownHosts = {
             nixbuild = {
