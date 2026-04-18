@@ -22,6 +22,7 @@
     outputs = { stable, unstable, self, ... } @ inputs : let
         arm = "aarch64-linux";
         x86 = "x86_64-linux";
+        i686 = "i686-linux";
     in {
         nixOnDroidConfigurations.nixdroid = inputs.nixdroid.lib.nixOnDroidConfiguration {
             pkgs = import inputs.stable { system = arm; };
@@ -53,6 +54,19 @@
                 unstable = inputs.unstable.legacyPackages.${x86};
                 zen-browser = inputs.zen-browser.packages.${x86};
             };
+        };
+
+        nixosConfigurations.NCC-686 = stable.lib.nixosSystem {
+            pkgs = import inputs.stable {
+                system = i686;
+                overlays = [ self.overlays.default ];
+                config.allowUnsupportedSystem = true;
+            };
+            system = i686;
+            modules = [
+                ./hosts/NCC-686.nix
+                ./users/taco.nix
+            ];
         };
 
         overlays.default = final: prev: {
