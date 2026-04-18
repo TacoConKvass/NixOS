@@ -18,8 +18,10 @@
         enable = true;
         config = {
             pull = true;
-            repository = "https://github.com/TacoConKvass/nvim";
-            branch = "lazy";
+            repository = {
+                url = "https://github.com/TacoConKvass/nvim";
+                branch = "lazy";
+            };
             user = inputs.config.users.users.taco;
         };
     };
