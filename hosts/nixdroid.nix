@@ -47,6 +47,7 @@ in {
         pkgs.fastfetch
         pkgs.ncurses
         pkgs.helix
+        pkgs.cloudflared
     ];
 
     system.stateVersion = "24.05";
