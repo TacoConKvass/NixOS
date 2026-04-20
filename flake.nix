@@ -59,7 +59,14 @@
         nixosConfigurations.NCC-686 = stable.lib.nixosSystem {
             pkgs = import inputs.stable {
                 system = i686;
-                overlays = [ self.overlays.default ];
+                overlays = [
+                    self.overlays.default 
+                    (final: prev: {
+                        cloudflared = prev.cloudflared.overrideAttrs(old: {
+                            doCheck = false;
+                        });
+                    })
+                ];
                 config.allowUnsupportedSystem = true;
             };
             system = i686;
