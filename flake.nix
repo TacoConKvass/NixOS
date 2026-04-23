@@ -69,7 +69,6 @@
                 ];
                 config.allowUnsupportedSystem = true;
             };
-            system = i686;
             modules = [
                 ./hosts/NCC-686.nix
                 ./users/taco.nix

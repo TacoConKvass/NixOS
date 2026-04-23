@@ -1,4 +1,4 @@
-{ pkgs, lib, ... } @ inputs : {
+{ pkgs, lib, config, ... } @ inputs : {
     imports = [ 
         ./../modules
         ./hardware/aspire-1360.nix
@@ -42,7 +42,16 @@
         HandleLidSwitchExternalPower = "ignore";
     };
 
-    services.getty.greetingLine = "";
+    services.getty.greetingLine = ">>> ${config.networking.hostName} (${config.nixpkgs.hostPlatform.system}) <<<";
+
+    services.openssh.enable = true;
+    programs.ssh.extraConfig = ''
+        Host builder
+            Hostname        192.168.11.13
+            Port            55
+            User            taco
+            IdentityFIle    /home/taco/.env/hal13
+    '';
 
     i18n.defaultLocale = "en_US.UTF-8";
     console = {
