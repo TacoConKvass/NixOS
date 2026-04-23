@@ -22,6 +22,18 @@
         pkgs.helix
     ];
 
+    services.openssh = {
+        enable = true;
+        allowSFTP = true;
+        ports = [ 55 ];
+        settings = {
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+            PermitRootLogin = "no";
+            AllowUsers = [ "taco" "root" ];
+        };
+    };
+
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
     system.stateVersion = "24.11";

@@ -5,12 +5,16 @@ in {
     imports = [ ./../modules ];
     
     users.users.taco = {
+        isNormalUser = true;
+        home = "/home/taco";
         createHome = true;
         description = "TacoConKvass";
-        extraGroups = [ "wheel" ];
         group = "users";
-        home = "/home/taco";
+        extraGroups = [ "wheel" ];
         shell = pkgs.bash;
+        openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAeh8y/aKohPIq4/+hKH6CocM03l3cr8IaoXi21+24Wo taco"
+        ];
     };
 
     modules.git = {
