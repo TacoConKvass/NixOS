@@ -17,26 +17,32 @@ in {
             };
         };
         rust = lib.mkEnableOption "Ensure tools for Rust development are installed";
-        cSharp = lib.mkEnableOption "Ensure tools for C# development are installed";
+        dotnet = lib.mkEnableOption "Ensure tools for .NET development are installed";
     };
 
     config = {
         environment.systemPackages = ([]
             ++ (lib.optionals cfg.zig.enable [ cfg.zig.package ])
             ++ (lib.optionals cfg.rust [ pkgs.cargo pkgs.rustc pkgs.gcc ])
-            ++ (lib.optionals cfg.cSharp [(
-                dotnetPkgs.combinePackages [
-                    dotnetPkgs.dotnet_8.sdk
-                    dotnetPkgs.dotnet_9.sdk
-                    dotnetPkgs.sdk_10_0-bin
-                    pkgs.dotnetPackages.Nuget
-                ]
-            )])
         );
 
         modules.neovim.additionalPackages = []
             ++ (lib.optionals cfg.zig.enable [ cfg.zig.lsp ])
             ++ (lib.optionals cfg.rust [ pkgs.rust-analyzer ])
-            ++ (lib.optionals cfg.cSharp [ pkgs.roslyn-ls ]);
-    };
+            ++ (lib.optionals cfg.dotnet [ pkgs.roslyn-ls ]);
+    } // (lib.mkIf cfg.dotnet
+        (let
+            dotnet_pkg = dotnetPkgs.combinePackages [
+                dotnetPkgs.dotnet_8.sdk
+                dotnetPkgs.sdk_10_0-bin
+                pkgs.dotnetPackages.Nuget
+            ];
+        in {
+            environment.systemPackages = [ dotnet_pkg ];
+
+            environment.sessionVariables = {
+                DOTNET_ROOT = "${dotnet_pkg}/share/dotnet";
+            };
+        })
+    );
 }

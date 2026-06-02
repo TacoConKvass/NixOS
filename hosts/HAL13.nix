@@ -1,7 +1,7 @@
 { pkgs, zen-browser, ... } : {
     imports = [ ./../modules ];
 
-    modules.dev.cSharp = true;
+    modules.dev.dotnet = true;
 
     features.wm = {
         enable = true;
@@ -15,6 +15,7 @@
     };
 
     networking.hostName = "HAL13";
+    networking.resolvconf.enable = false;
     time.timeZone = "Europe/Warsaw";
 
     environment.systemPackages = [
