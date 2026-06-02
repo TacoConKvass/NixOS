@@ -8,14 +8,14 @@
             inputs.nixpkgs.follows = "nixdroid-pkgs";
         };
 
-        stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+        stable.url = "github:NixOS/nixpkgs/nixos-26.05";
         unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
 
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
-            inputs.nixpkgs.follows = "unstable";
+            inputs.nixpkgs.follows = "stable";
         };
     };
 
@@ -73,6 +73,10 @@
                 ./hosts/NCC-686.nix
                 ./users/taco.nix
             ];
+        };
+
+        devShell.${x86} = let pkgs = import inputs.stable { system = x86; }; in pkgs.mkShell {
+            buildInputs = [ pkgs.nil ];
         };
 
         overlays.default = final: prev: {
