@@ -12,11 +12,6 @@
         unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
-
-        zen-browser = {
-            url = "github:0xc000022070/zen-browser-flake";
-            inputs.nixpkgs.follows = "stable";
-        };
     };
 
     outputs = { stable, unstable, self, ... } @ inputs : let
@@ -24,69 +19,8 @@
         x86 = "x86_64-linux";
         i686 = "i686-linux";
     in {
-        nixOnDroidConfigurations.nixdroid = inputs.nixdroid.lib.nixOnDroidConfiguration {
-            pkgs = import inputs.stable { system = arm; };
-            modules = [
-                ./hosts/nixdroid.nix
-            ];
-            extraSpecialArgs = {
-                unstable = unstable.legacyPackages.${arm};
-            };
-        };
-
-        nixosConfigurations.HAL13 = stable.lib.nixosSystem {
-            pkgs = import inputs.stable {
-                system = x86;
-                overlays = [ self.overlays.default ];
-            };
-            system = x86;
-            modules = [
-                ./hosts/HAL13.nix
-                ./users/taco.nix
-                inputs.wsl.nixosModules.default {
-                    system.stateVersion = "24.11";
-                    wsl.enable = true;
-                    wsl.useWindowsDriver = true;
-                    wsl.defaultUser = "taco";
-                }
-            ];
-            specialArgs = {
-                unstable = inputs.unstable.legacyPackages.${x86};
-                zen-browser = inputs.zen-browser.packages.${x86};
-            };
-        };
-
-        nixosConfigurations.NCC-686 = stable.lib.nixosSystem {
-            pkgs = import inputs.stable {
-                system = i686;
-                overlays = [
-                    self.overlays.default 
-                    (final: prev: {
-                        cloudflared = prev.cloudflared.overrideAttrs(old: {
-                            doCheck = false;
-                        });
-                    })
-                ];
-                config.allowUnsupportedSystem = true;
-            };
-            modules = [
-                ./hosts/NCC-686.nix
-                ./users/taco.nix
-            ];
-        };
-
         devShell.${x86} = let pkgs = import inputs.stable { system = x86; }; in pkgs.mkShell {
             buildInputs = [ pkgs.nil ];
-        };
-
-        overlays.default = final: prev: {
-            niri = prev.niri.overrideAttrs(old: {
-                postPatch = ''
-                    substituteInPlace src/backend/winit.rs --replace \
-                        ".with_inner_size(LogicalSize::new(1280.0, 800.0))" \
-                        ".with_maximized(true).with_decorations(false)"
-                '';
-            });
         };
     };
 }
