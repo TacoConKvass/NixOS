@@ -2,24 +2,31 @@
     description = "Nix(OS) config";
 
     inputs = {
-        nixdroid-pkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-        nixdroid = {
-            url = "github:nix-community/nix-on-droid/release-24.05";
-            inputs.nixpkgs.follows = "nixdroid-pkgs";
-        };
-
+        # Main flake inputs
         stable.url = "github:NixOS/nixpkgs/nixos-26.05";
         unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+        # Auxillary inputs for specific machines
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
+        wsl.inputs.follows = "stable";
+
+        nixdroid.url = "github:nix-community/nix-on-droid/release-24.05";
     };
 
-    outputs = { stable, unstable, self, ... } @ inputs : let
+    outputs = { stable, ... }@inputs : let
         arm = "aarch64-linux";
-        x86 = "x86_64-linux";
+        x86_64 = "x86_64-linux";
         i686 = "i686-linux";
+
+        makeSystem = name: system: import ./hosts/${name}.nix (inputs // { inherit system; });
     in {
-        devShell.${x86} = let pkgs = import inputs.stable { system = x86; }; in pkgs.mkShell {
+        nixosConfigurations.HAL13         = makeSystem "HAL13" x86_64;
+        nixosConfigurations.NCC-686       = makeSystem "NCC-686" i686;
+        nixOnDroidConfigurations.nixdroid = makeSystem "nixdroid" arm;
+        
+        devShell.${x86_64} = let
+            pkgs = import stable { system = x86_64; };
+        in pkgs.mkShell {
             buildInputs = [ pkgs.nil ];
         };
     };
