@@ -22,6 +22,7 @@
         pkgs.fastfetch
         pkgs.helix
     ];
+    environment.sessionVariables.EDITOR = "hx";
 
     services.openssh = {
         enable = true;
