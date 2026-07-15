@@ -57,7 +57,9 @@ in {
             in ''
             echo "setting up ${gitconfig}..."
             if [ ! -f ${gitconfig} ]; then
-                echo '
+                echo '[core]
+                filemode = false
+                core.eol = crlf
             [user]
                 name = "${cfg.config.username}"
                 email = "${cfg.config.email}"
