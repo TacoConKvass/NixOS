@@ -20,6 +20,8 @@
 
         makeSystem = name: system: import ./systems/${name}.nix (inputs // { inherit system; });
     in {
+        lib = import ./lib stable.lib;
+
         nixosConfigurations.HAL13         = makeSystem "HAL13" x86_64;
         nixosConfigurations.NCC-686       = makeSystem "NCC-686" i686;
         nixOnDroidConfigurations.nixdroid = makeSystem "nixdroid" arm;
