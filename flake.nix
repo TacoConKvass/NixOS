@@ -18,7 +18,7 @@
         x86_64 = "x86_64-linux";
         i686 = "i686-linux";
 
-        makeSystem = name: system: import ./hosts/${name}.nix (inputs // { inherit system; });
+        makeSystem = name: system: import ./systems/${name}.nix (inputs // { inherit system; });
     in {
         nixosConfigurations.HAL13         = makeSystem "HAL13" x86_64;
         nixosConfigurations.NCC-686       = makeSystem "NCC-686" i686;
