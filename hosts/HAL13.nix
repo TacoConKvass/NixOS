@@ -1,14 +1,4 @@
-{ pkgs, ... } : {
-  features = {
-    dev.dotnet = true;
-
-    wm = {
-      enable = true;
-      apps = [ pkgs.foot ];
-      fonts = [ pkgs.nerd-fonts.jetbrains-mono ];
-    };
-  };
-  
+{ pkgs, ... } : { 
   networking.hostName = "HAL13";
   networking.resolvconf.enable = false;
 
@@ -16,7 +6,11 @@
 
   environment.systemPackages = [
     pkgs.fastfetch
+    pkgs.git
+    pkgs.helix
   ];
+
+  environment.sessionVariables.EDITOR = "hx";
 
   services.openssh = {
     enable = true;
@@ -24,7 +18,7 @@
     ports = [ 55 ];
     settings = {
       AllowUsers = [ "taco" ];
-      PermitRootLogin = false;
+      PermitRootLogin = "no";
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
     };
