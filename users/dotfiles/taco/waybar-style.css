@@ -1,0 +1,41 @@
+window#waybar.top {
+    background: rgba(10, 10, 10, 0.35);
+    border-radius: 20px;
+    margin: 0px 10px;
+    color: #eee;
+}
+
+#pulseaudio {
+    min-width: 50px;
+    margin: 0px 10px;
+}
+
+#workspaces {
+    margin: 0px 10px;
+}
+
+#workspaces button {
+    min-width: 28px;
+    color: #eee;
+    margin: 0px 3px;
+    padding: 2px;
+}
+
+#workspaces button.focused {
+    border-bottom: 3px solid #eee;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    background: rgba(10, 10, 10, .35);
+    border-color: rgba(10, 10, 10, .35);
+    box-shadow: none;
+}
+
+#clock {
+    background: rgba(10, 10, 10, .35);
+    color: #eee;
+    padding: 0px 10px;
+    border-radius: 20px;
+}
+
