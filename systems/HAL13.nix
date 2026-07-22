@@ -1,6 +1,7 @@
-{ stable, unstable, wsl, system, ... }: stable.lib.nixosSystem {
+{ stable, unstable, wsl, system, self, ... }: stable.lib.nixosSystem {
   pkgs = import stable { inherit system; };
   specialArgs.unstable = import unstable { inherit system; };
+  specialArgs.self = self;
 
   modules = [
     ./../modules
