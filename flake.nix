@@ -8,9 +8,9 @@
 
         # Auxillary inputs for specific machines
         wsl.url = "github:nix-community/NixOS-WSL/2411.6.0";
-        wsl.inputs.follows = "stable";
+        wsl.inputs.nixpkgs.follows = "stable";
 
-        nixdroid.url = "github:nix-community/nix-on-droid/release-24.05";
+        # nixdroid.url = "github:nix-community/nix-on-droid/release-24.05";
     };
 
     outputs = { stable, ... }@inputs : let
