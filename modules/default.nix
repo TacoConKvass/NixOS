@@ -1,3 +1,5 @@
 { ... } : {
-  imports = [ ./wm.nix ];
+  imports = [
+    ./files.nix
+  ];
 }
